@@ -24,11 +24,118 @@ de forma aleatoria utilizando el módulo random.
 Implementar las condiciones necesarias para evaluar.
 
 1. Empate: Ambas elecciones son iguales.
-2. Victoria: El usuario vence a la PC (Priedra vence a Tijera, Tijera vence a Papel, Papel vence a Piedra).
+2. Victoria: El usuario vence a la PC (Piedra vence a Tijera, Tijera vence a Papel, Papel vence a Piedra).
 3. Derrota: La PC vence al usuario.
 
-* Control de Flujo: El juego debe repetirse indefinidamente dentro de un blucle hasta que el usuario decida escribir 
+* Control de Flujo: El juego debe repetirse indefinidamente dentro de un bucle hasta que el usuario decida escribir 
 la palabra (Salir).
 
 Solución del Ejercicio Propuesto    
+'''
+
+# Importación de módulos necesarios
+import random
+import time
+
+# Encabezado decorativo
+print("=" * 60)
+print("   Juego Interactivo: Piedra, Papel o Tijera   ".center(60))
+print("=" * 60)
+
+# Opciones válidas del juego.
+opciones = ["piedra", "papel", "tijera"]
+
+# Dibujos en ASCII para mostrar cada jugada.
+ascii_art = {
+    "piedra": """
+        _______
+    ---'   ____)    
+          (_____)
+          (_____)
+          (____)
+    ---.__(___)
+    """,
+    "papel": """
+         _______
+    ---'    ____)____
+               ______)
+              _______)
+             _______)
+    ---.__________)
+    """,
+    "tijera": """
+        _______
+    ---'   ____)____
+              ______)
+           __________)
+          (____)
+    ---.__(___)
+    """
+}
+
+# Bucle principal del juego.
+# Se repite hasta que el usuario escriba "salir".
+while True:
+    # Pedimos la elección del jugador y la normalizamos a minúsculas.
+    jugador = input("Elige Piedra, Papel o Tijera (o escribe 'Salir'): ").lower()
+    
+    if jugador == "salir":
+        print("Has decidido salir del juego. ¡Hasta pronto!")
+        break
+    
+    # Validamos que la entrada esté dentro de las opciones aceptadas.
+    if jugador not in opciones:
+        print("Entrada inválida. Intenta nuevamente.")
+        continue
+    
+    # La computadora elige aleatoriamente una opción.
+    computadora = random.choice(opciones)
+    time.sleep(0.5)
+    
+    # Mostramos lo que eligió cada uno con arte ASCII.
+    print(f"Tú elegiste: {jugador.capitalize()}")
+    print(ascii_art[jugador])
+    print(f"La computadora eligió: {computadora.capitalize()}")
+    print(ascii_art[computadora])
+    time.sleep(1)
+    
+    # Determinamos el resultado según las reglas del juego.
+    if jugador == computadora:
+        print("Resultado: ¡Empate!")
+    elif (jugador == "piedra" and computadora == "tijera") or \
+         (jugador == "tijera" and computadora == "papel") or \
+         (jugador == "papel" and computadora == "piedra"):
+        print("Resultado: ¡Ganaste! 🎉")
+    else:
+        print("Resultado: La computadora gana 😢")
+    
+    print("-" * 60)
+
+# Mensaje final
+print("=" * 60)
+print("Fin del Juego - Gracias por jugar".center(60))
+print("=" * 60)
+
+'''
+Explicación de la lógica clave:
+
+- opciones = ["piedra", "papel", "tijera"]: lista con las tres jugadas posibles.
+- jugador.lower(): convierte la entrada del usuario a minúsculas para comparar correctamente sin importar cómo escribió la palabra.
+- if jugador == "salir": permite que el jugador termine el juego en cualquier momento.
+- if jugador not in opciones: valida que la jugada sea correcta y evita que el programa falle.
+- random.choice(opciones): selecciona de forma aleatoria la jugada de la computadora.
+- if jugador == computadora: detecta el empate cuando ambos eligen lo mismo.
+- elif ...: evalúa las tres combinaciones en las que el jugador gana según las reglas del juego.
+- else: cualquier otra combinación válida significa que la computadora gana.
+- while True: mantiene el juego en ejecución hasta que el usuario decida salir.
+- time.sleep(): agrega pequeñas pausas para que el juego se sienta más natural.
+
+Lógica clave:
+
+1. Tomar la elección del usuario.
+2. Validar que la elección sea válida.
+3. Elegir la jugada de la computadora aleatoriamente.
+4. Comparar ambas elecciones según las reglas de Piedra, Papel o Tijera.
+5. Mostrar el resultado correcto (empate, victoria o derrota).
+6. Repetir el juego hasta que el usuario escriba "salir".
 '''

@@ -40,5 +40,68 @@ Solución del Ejercicio Propuesto
 '''
 
 
+import time  # Librería para pausar la ejecución con time.sleep()
 
+# ----- 1. Encabezado visual -----
+print("=" * 60)
+print("   Simulador de Carga de Archivos   ".center(60))
+print("=" * 60)
+
+# ----- 2. Entrada de datos -----
+# Pedimos los valores al usuario y los convertimos a enteros.
+# El programa espera que se ingrese un número válido.
+tamaño = int(input("Ingrese el tamaño del archivo (MB): "))
+tiempo_total = int(input("Ingrese el tiempo de carga (segundos): "))
+
+print(f"\nIniciando subida de {tamaño} MB...\n")
+
+# ----- 3. Configuración de la barra de progreso -----
+pasos = 20  # Número de actualizaciones de la barra (20 pasos = 5% por paso)
+pausa = tiempo_total / pasos  # Segundos entre cada actualización de progreso
+
+# ----- 4. Simulación del progreso -----
+# El bucle recorre los pasos de 1 a 20 para construir la barra.
+for i in range(1, pasos + 1):
+    porcentaje = int((i / pasos) * 100)  # Convierte el paso actual a porcentaje
+    barra = "#" * i + "-" * (pasos - i)  # Construye la barra visual
+
+    # Muestra la barra en la misma línea y fuerza el refresco inmediato.
+    print(f"\r[{barra}] {porcentaje}%", end="", flush=True)
+
+    time.sleep(pausa)  # Pausa antes del siguiente paso
+
+# Avanza a la siguiente línea después de terminar la barra.
+print()
+
+# ----- 5. Mensaje final -----
+print("¡Archivo de", tamaño, "MB subido con éxito!")
+print("=" * 60)
+
+'''
+Explicación de la Lógica Clave:
+
+• pasos = 20: define cuántas veces se actualiza la barra.
+Cada paso equivale a un 5% de avance.
+• pausa = tiempo_total / pasos: calcula cuánto tiempo debe esperar
+el programa entre cada actualización.
+• El bucle for simula el avance de la carga a través del tiempo.
+• porcentaje = int((i / pasos) * 100): convierte el paso actual
+en un porcentaje de 0 a 100.
+• barra = "#" * i + "-" * (pasos - i): construye la barra
+con caracteres llenos y vacíos.
+• print(..., end="", flush=True): actualiza la barra en la misma línea.
+• time.sleep(pausa): simula el tiempo de carga entre cada paso.
+
+La logica clave es:
+
+1. Entrada de datos: se solicita el tamaño del archivo y el tiempo total de carga.
+2. Cálculo del intervalo: el tiempo total se divide en pasos iguales
+para que el avance sea uniforme.
+3. Actualización de la barra: cada iteración del bucle añade
+un símbolo '#' más a la barra.
+4. Visualización en la misma línea: se usa '\r' para sobreescribir
+la línea actual y mostrar el progreso de izquierda a derecha.
+5. Mensaje final: al terminar el bucle, se muestra que la carga
+se completó exitosamente.
+'''
 

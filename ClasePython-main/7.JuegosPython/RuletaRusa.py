@@ -14,6 +14,8 @@ de usuario y control del flujo basado en condiciones de victoria o derrota.
 4. Condición de Derrota: Si la recamara seleccionada coincide con la de la bala, el programa termina inmediatamente.
 5. Condición de Victoria: El jugador gana si logra sobrevivir a 5 intentos (ya que el sexto intento sería el fatal).
 '''
+
+
 # Importación de librerías: random para el azar y time para manejar pausas
 import random
 import time
@@ -67,7 +69,8 @@ print("Fin del Juego - Gracias por jugar")
 print("="*50)
 
 '''
-Explicación de la Lógica Clave
+Explicación de la Lógica Clave:
+
 •	random.randint(1, 6): Es el motor del juego. Se usa dos veces: primero para "esconder" la bala y segundo para determinar 
     qué recámara queda frente al percutor al girar el tambor.
 •	El Bucle while True: Crea un ciclo infinito que solo se detiene mediante la instrucción break. En este caso, hay dos 
@@ -78,4 +81,12 @@ Explicación de la Lógica Clave
     del programa, obligando al usuario a interactuar para avanzar.
 •	Legibilidad: El uso de time.sleep() no afecta los datos, pero mejora la experiencia de usuario (UX) al simular el 
     tiempo que tardaría la acción en la vida real.
+
+La lógica clave es:
+
+1. Inicializar el juego con una bala en una posición aleatoria.
+2. Usar un bucle para permitir múltiples intentos de disparo.
+3. En cada intento, simular el giro del tambor con una nueva posición aleatoria.
+4. Evaluar si el jugador pierde (bala coincide con recámara) o gana (sobrevive a 5 intentos).
+5. Terminar el juego con un mensaje adecuado según el resultado final.
 '''
